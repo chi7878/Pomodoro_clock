@@ -381,7 +381,7 @@
                             <li v-for="(item,index) in mission_list.slice(1,4)" :key="index">
                                 <a href="#" class="mission_list" v-cloak @click.prevent="change_mission(item)">
                                     <i class="far fa-circle"></i>
-                                    <p>{{item.name}}</p>
+                                    <p v-cloak>{{item.name}}</p>
                                     <i class="far fa-play-circle play_mission"></i>
                                 </a>
                             </li>
