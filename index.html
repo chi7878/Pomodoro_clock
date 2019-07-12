@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Pomodoro_clock</title>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" />
+        <link
+            href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,400,500,700&display=swap&subset=chinese-traditional"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div id="app">
+            <div class="menu_content hidden_menu" :class="{open_menu:menu_status=='open',close_menu:menu_status=='close'}"  >
+                <div class="menu">
+                    <ul>
+                        <li>
+                            <a href="#" class="menu_link" :class="{menu_active:menu=='to-do list'}" @click.prevent="menu = 'to-do list'" >
+                                <i class="fas fa-bars"></i>
+                                <p>TO-DO LIST</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu_link" :class="{menu_active:menu=='analytics'}" @click.prevent="menu = 'analytics'">
+                                <i class="fas fa-server"></i>
+                                <p>ANALYTICS</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu_link" :class="{menu_active:menu=='ringtones'}" @click.prevent="menu = 'ringtones'">
+                                <i class="far fa-file-audio"></i>
+                                <p>RINGTONES</p>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="mission_player">
+                        <div class="player_radius">
+                            <div class="menu_title">
+                                <p v-cloak class="menu_time">
+                                    {{ time.minute }}<span :class="{start_repet: play_start}">:</span>{{ time.second }}
+                                </p>
+                                <p class="menu_text">{{ mission_list[0].name }}</p>
+                            </div>
+                            <a href="#" class="player_home" @click.prevent="menu_status='close'">
+                                <div class="player_home_border">
+                                    <div class="palyer_icon">
+                                        <i class="fas fa-play-circle" v-if="play_start == false"></i>
+                                        <i class="fas fa-stop-circle" v-if="play_start == true"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="is_content">
+                    <div class="to_do_list " v-if="menu =='to-do list'" :class="{}">
+                        <div class="mission_content">
+                            <div class="add_mission_box">
+                                <input
+                                    type="text"
+                                    class="add_input"
+                                    placeholder="新增新的任務..."
+                                    v-model="addmission.name"
+                                />
+                                <a href="#" class="add_btn" @click.prevent="add_click"><i class="fas fa-plus"></i></a>
+                            </div>
+                        </div>
+                        <div class="todo_box">
+                            <p class="title_todo">TO-DO</p>
+                            <div class="mission_list_content">
+                                <p v-if="mission_list.length == 0">目前無任務</p>
+                                <ul class="mission_box" v-if="mission_list.length >= 1">
+                                    <li v-for="(item,index) in mission_list" :key="index" @click.prevent="change_mission(item)">
+                                        <a href="#" class="mission_list" v-cloak>
+                                            <i class="far fa-circle"></i>
+                                            <p>{{ item.name }}</p>
+                                            <i class="far fa-play-circle play_mission"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="done_box">
+                            <p class="title_done">DONE</p>
+                            <div class="mission_list_content">
+                                <p v-if="finish_mission.length == 0">無完成任務</p>
+                                <ul class="mission_box" v-if="finish_mission.length >= 1">
+                                    <li v-for="(item,index) in finish_mission" :key="item.name">
+                                        <a href="#" class="mission_list" v-cloak>
+                                            <i class="far fa-check-circle"></i>
+                                            <p>{{ item.name }}</p>
+                                            <i class="fas fa-circle play_mission"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="analytics" v-if="menu =='analytics'">
+                        <div class="focus_time">
+                            <p>FOCUS TIME</p>
+                            <div class="all_time">
+                                <div class="today_time">
+                                    <p class="today_title">TODAY</p>
+                                    <p class="today_tomato">20 <span>/TOMATO</span></p>
+                                </div>
+                                <div class="week_time">
+                                    <p class="week_title">WEEK</p>
+                                    <p class="week_tomato">108 <span>/TOMATO</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart">
+                            <p>CHART</p>
+                            <table>
+                                <tr>
+                                    <td> 24</td>
+                                    <td><div class=""></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class=""></div></td>
+                                </tr>
+                                <tr>
+                                    <td>20</td>
+                                    <td><div class=""></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                </tr>
+                                <tr>
+                                    <td>16</td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                </tr>
+                                <tr>
+                                    <td>12</td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class=""></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                    <td><div class="chart_color"></div></td>
+                                </tr>
+                                <tr class="data_chart">
+                                    <td style="border:none"></td>
+                                    <td>7/1</td>
+                                    <td>7/2</td>
+                                    <td>7/3</td>
+                                    <td>7/4</td>
+                                    <td>7/5</td>
+                                    <td>7/6</td>
+                                    <td>7/7</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="ringtones" v-if="menu =='ringtones'">
+                        <div class="work">
+                            <p>WORK</p>
+                            <form>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="none" checked/>
+                                    <label for="none" class="music_text">none</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="Default" />
+                                    <label for="Default" class="music_text">Default</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="alarm" />
+                                    <label for="alarm" class="music_text">alarm</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="none" />
+                                    <label for="none" class="music_text">none</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="beep" />
+                                    <label for="beep" class="music_text">beep</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="bell" />
+                                    <label for="bell" class="music_text">bell</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="bird" />
+                                    <label for="bird" class="music_text">bird</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="bugle" />
+                                    <label for="bugle" class="music_text">bugle</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="digital" />
+                                    <label for="digital" class="music_text">digital</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="drop" />
+                                    <label for="drop" class="music_text">drop</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="horn" />
+                                    <label for="horn" class="music_text">horn</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="music" />
+                                    <label for="music" class="music_text">music</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="ring" />
+                                    <label for="ring" class="music_text">ring</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="warning" />
+                                    <label for="warning" class="music_text">warning</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="whistle" />
+                                    <label for="whistle" class="music_text">whistle</label>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="break">
+                            <p>BREAK</p>
+                            <form>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="none" checked />
+                                    <label for="none" class="music_text">none</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="Default" />
+                                    <label for="Default" class="music_text">Default</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="alarm" />
+                                    <label for="alarm" class="music_text">alarm</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="none" />
+                                    <label for="none" class="music_text">none</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="beep" />
+                                    <label for="beep" class="music_text">beep</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="bell" />
+                                    <label for="bell" class="music_text">bell</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="bird" />
+                                    <label for="bird" class="music_text">bird</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="bugle" />
+                                    <label for="bugle" class="music_text">bugle</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="digital" />
+                                    <label for="digital" class="music_text">digital</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="drop" />
+                                    <label for="drop" class="music_text">drop</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="horn" />
+                                    <label for="horn" class="music_text">horn</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="music" />
+                                    <label for="music" class="music_text">music</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="ring" />
+                                    <label for="ring" class="music_text">ring</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="warning" />
+                                    <label for="warning" class="music_text">warning</label>
+                                </div>
+                                <div class="input_music_box">
+                                    <input type="radio" name="work_music" id="whistle" />
+                                    <label for="whistle" class="music_text">whistle</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="close">
+                    <a href="#" @click.prevent="menu_status='close';"><i class="fas fa-times"></i></a>
+                    <p>POMODORO</p>
+                </div>
+            </div>
+
+            <div class="background_color" :class="{bg_rest:play_rest == true}">
+                <div class="mission">
+                    <div class="mission_content">
+                        <div class="add_mission_box" >
+                            <input
+                                type="text"
+                                class="add_input"
+                                placeholder="新增新的任務..."
+                                v-model="addmission.name"
+                                :class="{font_rest:play_rest == true}"
+                                :style="{'--paly-color': play_rest ? '#00A7FF' : '#FF4384'}"
+                            />
+                            <a href="#" class="add_btn" @click.prevent="add_click" ><i class="fas fa-plus" :class="{font_rest:play_rest == true}"></i></a>
+                        </div>
+                    </div>
+                    <div class="now_mission_content" v-if="mission_list.length != 0">
+                        <div class="now_mission_box">
+                            <a class="check_radius"></a>
+                            <div class="now_mission_title" v-cloak>
+                                <p>{{ mission_list[0].name }}</p>
+                                <div class="small_radius">
+                                    <div class="time_radius"></div>
+                                    <div class="time_radius"></div>
+                                    <div class="time_radius"></div>
+                                    <div class="time_radius"></div>
+                                    <div class="time_radius"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="time_box">
+                            <p v-cloak :class="{font_rest:play_rest == true}">
+                                {{ time.minute }}<span :class="{start_repet: play_start}">:</span>{{ time.second }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mission_list_content">
+                        <p v-if="mission_list.length == 1&&play_rest == false">目前無任務</p>
+                        <p v-if="play_rest == true">休息中</p>
+                        <ul class="mission_box" v-if="mission_list.length > 1&&play_rest == false">
+                            <li v-for="(item,index) in mission_list.slice(1,4)" :key="index">
+                                <a href="#" class="mission_list" v-cloak @click.prevent="change_mission(item)">
+                                    <i class="far fa-circle"></i>
+                                    <p>{{item.name}}</p>
+                                    <i class="far fa-play-circle play_mission"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <a href="#" class="more_btn" v-if="mission_list.length > 4" @click.prevent="menu = 'to-do list';menu_status='open';">MORE</a>
+                    </div>
+                </div>
+                <div class="navbar">
+                    <div class="menu_list">
+                        <a href="#" @click.prevent="menu = 'to-do list';menu_status='open';"><i class="fas fa-bars"></i></a>
+                        <a href="#" @click.prevent="menu = 'analytics';menu_status='open';"><i class="fas fa-server"></i></a>
+                        <a href="#" @click.prevent="menu = 'ringtones';menu_status='open';"><i class="far fa-file-audio"></i></a>
+                    </div>
+                    <p>POMODORO</p>
+                </div>
+                <div class="play_time_box" :class="{border_rest:play_rest == true}">
+                    <div class="time">
+                        <div class="left_radius_box">
+                            <div class="left_radius" :class="{bg_dark_rest:play_rest == true}" :style="{transform:'rotate('+ radius_deg.left +'deg)'}"></div>
+                        </div>
+                        <div class="right_radius_box">
+                            <div class="right_radius" :class="{bg_dark_rest:play_rest == true}" :style="{transform:'rotate('+ radius_deg.right +'deg)'}"></div>
+                        </div>
+                    </div>
+
+                    <div class="panel_box" :class="{bg_dark_rest:play_rest == true}">
+                        <div class="end_box" >
+                            <div
+                                class="start_bgcolor"
+                                :class="{start_color_stop:!play_start,start_color_start:play_start}"
+                            ></div>
+                            <a href="#" class="stop_btn start_color_btn" v-if="play_start == true" @click.prevent="agin_mission" :class="{font_rest:play_rest == true}"><i class="fas fa-stop"></i
+                            ></a>
+                        </div>
+                    </div>
+                    <a
+                        href="#"
+                        v-cloak
+                        class="start_btn"
+                        @click.prevent="mission_start"
+                        :class="{start_color_btn:play_start,end_color_btn:!play_start}"
+                    >
+                        <i class="fas fa-play-circle" v-if="play_start == false"></i>
+                        <i class="fas fa-pause-circle" v-if="play_start == true" :class="{font_rest:play_rest == true}"></i
+                    ></a>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+        <script src="all.js"></script>
+    </body>
+</html>

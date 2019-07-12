@@ -1,0 +1,786 @@
+/* css reset */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol,
+ul {
+    list-style: none;
+}
+blockquote,
+q {
+    quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: "";
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+/* css reset end */
+
+body,
+html {
+    padding: 0;
+    margin: 0;
+    font-family: "Noto Sans TC", sans-serif;
+}
+
+:root{
+    --paly-color:#FF4384;
+}
+
+.background_color {
+    background-color: #ffedf7;
+    max-width: 100%;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5%;
+    z-index: 1;
+}
+.background_color::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    background-color: #003164;
+    width: 35%;
+    z-index: -9999;
+}
+
+.mission {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+/* mission  mission_content */
+
+.add_mission_box {
+    display: flex;
+}
+
+.add_input {
+    padding: 16px 16px;
+    width: 350px;
+    border: none;
+}
+::placeholder {
+    color: var(--paly-color);
+    font-family: "Noto Sans TC", sans-serif;
+}
+.add_mission_box input:focus {
+    outline: 2px solid #ff4384;
+}
+
+.add_btn {
+    padding: 16px;
+    background-color: #fff;
+    color: #ff4384;
+}
+
+/*mission  now_mission_box */
+
+.now_mission_box {
+    display: flex;
+    position: relative;
+    z-index: 11;
+}
+
+.now_mission_box .check_radius {
+    width: 48px;
+    height: 48px;
+    border: 2px solid #003164;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.now_mission_title p {
+    font-weight: 700;
+    color: #003164;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.now_mission_box .small_radius {
+    display: flex;
+}
+
+.now_mission_title .time_radius {
+    width: 12px;
+    height: 12px;
+    background-color: #003164;
+    border-radius: 50%;
+    margin-right: 3px;
+}
+
+.time_box {
+    font-size: 160px;
+    font-weight: 700;
+    color: #ff4384;
+    position: relative;
+    z-index: 10;
+}
+
+.time_box .start_repet {
+    animation-name: repettime;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes repettime {
+    form {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/*mission  mission_list_content */
+
+.mission_list_content > p {
+    font-size: 30px;
+    font-weight: 700;
+    color: #003164;
+    text-align: center;
+}
+
+.mission_box li a {
+    display: inline-flex;
+    text-decoration: none;
+    align-items: center;
+    color: #003164;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.mission_box .mission_list p {
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+.mission_box .play_mission {
+    margin-left: 150px;
+}
+
+.mission_list_content .more_btn {
+    color: #ff4384;
+    text-decoration: none;
+    display: block;
+    text-align: right;
+}
+
+/* navbar */
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.menu_list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -50px;
+}
+
+.menu_list a {
+    color: #fff;
+    font-size: 30px;
+    padding-bottom: 48px;
+}
+
+.navbar p {
+    transform: rotate(90deg);
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 3px;
+}
+
+/* play_time_box */
+
+.play_time_box {
+    position: absolute;
+    border-radius: 50%;
+    border: 4px solid #ff4384;
+    width: 540px;
+    height: 540px;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20%;
+}
+
+.play_time_box .panel_box {
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    background-color: #ff4384;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.play_time_box .time {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.time .left_radius_box,
+.time .right_radius_box {
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    overflow: hidden;
+}
+.time .left_radius_box {
+    border-radius: 540px 0 0 540px;
+}
+.time .right_radius_box {
+    border-radius: 0 540px 540px 0;
+}
+
+.time .right_radius_box {
+    right: 0;
+}
+
+.time .left_radius,
+.time .right_radius {
+    height: 540px;
+    width: 270px;
+    background-color: #ff4384;
+}
+
+.time .left_radius {
+    border-radius: 540px 0 0 540px;
+    transform-origin: 100% 50%;
+}
+.time .right_radius {
+    border-radius: 0 540px 540px 0;
+    transform-origin: 0 50%;
+}
+
+.end_box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.end_box .start_bgcolor {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 50%;
+    transform-origin: 50% 50%;
+}
+
+.start_color_stop {
+    transform: scale(0);
+}
+
+.start_color_start {
+    animation-name: start_color;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+}
+
+@keyframes start_color {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.end_box a {
+    position: absolute;
+    font-size: 20px;
+    left: 63%;
+    top: 60%;
+}
+
+.end_color_btn {
+    color: #fff;
+}
+.start_color_btn {
+    color: #ff4384; 
+}
+
+.start_btn {
+    font-size: 120px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/*menu_content*/
+
+.menu_content {
+    position: fixed;
+    z-index: 999999;
+    width: 100vw;
+    height: 100vh;
+    background-color: #003164;
+    display: flex;
+    justify-content: space-around;
+}
+
+.hidden_menu{
+    bottom: -100vh;
+}
+
+.close_menu{
+    animation-name: close_menu;
+    animation-duration: .3s; 
+    animation-timing-function: ease-out;
+    bottom: -100vh;
+}
+@keyframes close_menu {
+    from {
+        bottom: 0;
+    }
+    to {
+        bottom: -100vh;
+    }
+}
+
+.open_menu{
+    animation-name: open_menu;
+    animation-duration: .3s; 
+    animation-timing-function: ease-out;
+    bottom: 0px;
+}
+@keyframes open_menu {
+    from {
+        bottom: -100vh;
+    }
+    to {
+        bottom: 0;
+    }
+}
+
+.colse_anim {
+    animation-name: colse_menu;
+    animation-duration: 1s; 
+    animation-timing-function: ease-out;
+    bottom: -100vh;
+}
+
+.menu {
+    padding-top: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+}
+
+.menu li .menu_link {
+    display: flex;
+    font-size: 36px;
+    text-decoration: none;
+    color: #ffffff20;
+    font-weight: 700;
+    margin-bottom: 50px;
+}
+
+.menu li .menu_active {
+    color: #ff4384;
+}
+
+.menu li i {
+    margin-right: 10px;
+}
+
+.mission_player {
+    width: 350px;
+    height: 400px;
+    overflow: hidden;
+}
+
+.mission_player .player_radius {
+    width: 350px;
+    height: 350px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -170px;
+}
+
+.menu_title {
+    text-align: center;
+}
+
+.menu_title .menu_time {
+    font-size: 64px;
+    font-weight: 700;
+    color: #ff4384;
+    margin-bottom: 10px;
+    padding-top: 60px;
+}
+
+.menu_title .menu_text {
+    color: #003164;
+    font-weight: 500;
+}
+
+.player_home {
+    width: 100px;
+    height: 100px;
+    background-color: #003164;
+    position: absolute;
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -50px;
+}
+
+.player_home .player_home_border {
+    width: 85%;
+    height: 85%;
+    position: absolute;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #ff4384;
+    background-color: #ffedf7;
+}
+
+.player_home .palyer_icon {
+    position: absolute;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 70px;
+    color: #ff4384;
+}
+
+.is_content {
+    display: flex;
+}
+
+.is_content .mission_content {
+    padding-top: 48px;
+}
+
+.todo_box,
+.done_box,
+.focus_time > p,
+.chart > p,
+.work > p,
+.break > p {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 49px 0;
+}
+
+.todo_box .mission_list_content > p,
+.done_box .mission_list_content > p {
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.title_todo,
+.title_done,
+.focus_time > p,
+.chart > p,
+.work > p,
+.break > p {
+    background-color: #ffffff20;
+    padding: 8px 16px;
+}
+
+.todo_box .mission_box li a,
+.done_box .mission_box li a {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    padding: 15px 5px;
+    margin: 0;
+
+}
+
+.done_box .mission_box li p {
+    text-decoration: line-through;
+}
+
+.chart table{
+    width: 100%;
+    text-align:center;
+}
+
+.chart table td:first-child{
+    border-right:1px solid #fff;
+    height: 39px;
+}
+
+.chart table td{
+    position: relative;
+}
+
+.chart table td div{
+    position: absolute;
+    left:50%;
+    transform:translateX(-50%);
+    width: 70%;
+    height: 40px;
+
+}
+
+.chart .chart_color{
+    background-color: #fff;
+}
+
+.data_chart td{
+    border-top:1px solid #fff;
+    padding-top:16px;
+}
+
+.menu_content .close {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu_content .close a {
+    padding-top: 48px;
+    font-size: 40px;
+    color: #fff;
+}
+
+.menu_content .close p {
+    transform: rotate(90deg);
+    margin-bottom: 100px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.analytics,
+.ringtones {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    width: 428px;
+}
+
+.focus_time .all_time {
+    display: flex;
+    justify-content: space-between;
+}
+
+.focus_time .today_title,
+.all_time .week_title {
+    margin-bottom: 10px;
+}
+
+.focus_time .today_tomato,
+.all_time .week_tomato {
+    font-size: 64px;
+    color: #ff4384;
+    font-weight: 700;
+}
+
+.focus_time .today_tomato span,
+.all_time .week_tomato span {
+    font-size: 16px;
+    color: #ffffff20;
+    font-weight: 500;
+}
+
+.work form,
+.break form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.input_music_box {
+    width: 33.3333%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 21px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.ringtones input[type="radio"] {
+    border: 2px solid #fff;
+    background-color: #ffffff00;
+    width: 20px;
+    height: 20px;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 50%;
+    position: relative;
+}
+
+.ringtones input[type="radio"]:checked {
+    border: 2px solid #ff4384;
+}
+
+.ringtones input[type="radio"]:checked::after {
+    content: "";
+    background-color: #ff4384;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* player rest  */
+
+.bg_rest{
+    background-color: #E5F3FF !important;
+}
+
+.bg_dark_rest{
+    background-color: #00A7FF !important;
+}
+
+.font_rest{
+    color: #00A7FF !important;
+}
+
+.border_rest{
+    border: 4px solid #00A7FF !important;
+}
