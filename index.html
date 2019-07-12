@@ -375,8 +375,8 @@
                         </div>
                     </div>
                     <div class="mission_list_content">
-                        <p v-if="mission_list.length == 1&&play_rest == false">目前無任務</p>
-                        <p v-if="play_rest == true">休息中</p>
+                        <p v-if="mission_list.length == 1&&play_rest == false" v-cloak>目前無任務</p>
+                        <p v-if="play_rest == true" v-cloak>休息中</p>
                         <ul class="mission_box" v-if="mission_list.length > 1&&play_rest == false">
                             <li v-for="(item,index) in mission_list.slice(1,4)" :key="index">
                                 <a href="#" class="mission_list" v-cloak @click.prevent="change_mission(item)">
